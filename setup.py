@@ -1,11 +1,14 @@
 """ตั้งค่าครั้งแรก — รัน: python setup.py"""
 
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
+
 ENV_FILE = BASE_DIR / ".env"
+REQ_FILE = BASE_DIR / "requirements.txt"
 ENV_EXAMPLE = BASE_DIR / ".env.example"
 
 
@@ -74,11 +77,7 @@ OPENWEATHER_API_KEY={current.get("OPENWEATHER_API_KEY", "")}
 
     # 4. ติดตั้ง dependencies
     print("\nกำลังติดตั้ง packages...")
-    import subprocess
-
-    subprocess.check_call(
-        [sys.executable, "-m", "pip", "install", "-r", "requirements.txt", "-q"]
-    )
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", str(REQ_FILE), "-q"])
     print("[OK] ติดตั้ง packages เรียบร้อย")
 
     print()
